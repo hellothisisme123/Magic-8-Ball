@@ -1,16 +1,385 @@
 * {
     margin: 0;
     padding: 0;
-    background-color: #555;
     font-family: Calibri;
     color: #fff;
+}
+
+html {
+    /* background-color: #555; */
+    background: radial-gradient(50% 50% at 50% 50%, rgba(14, 0, 43, 0.2) 0%, rgba(44, 0, 136, 0.2) 100%), linear-gradient(0deg, rgba(31, 0, 154, 0.2), rgba(31, 0, 154, 0.2)), #000000;
+    overflow: hidden;
 }
 
 :root {
 
 }
 
+@font-face {
+    font-family: Inter;
+    src: url('../production/fonts/inter/Inter-VariableFont.ttf');
+}
+
 .container {
     width: 100%;
     min-height: 100vh;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.title > * {
+    font-family: Inter;
+    font-weight: 900;
+    font-size: 4rem;
+    min-width: 1rem;
+    position: relative;
+    --timeDif: 0.2s;
+
+    translate: 0 -100%;
+}
+
+@keyframes titleLetterSlideDown {
+    0% {
+        translate: 0 -100%;
+    }
+    100% {
+        translate: 0 0%;
+    }
+}
+
+.title > *:nth-child(1) {
+    animation: titleLetterSlideDown ease-out 1s calc(var(--timeDif) * 0) forwards;
+}
+
+.title > *:nth-child(2) {
+    animation: titleLetterSlideDown ease-out 1s calc(var(--timeDif) * 1) forwards;
+}
+
+.title > *:nth-child(3) {
+    animation: titleLetterSlideDown ease-out 1s calc(var(--timeDif) * 2) forwards;
+}
+
+.title > *:nth-child(4) {
+    animation: titleLetterSlideDown ease-out 1s calc(var(--timeDif) * 3) forwards;
+}
+
+.title > *:nth-child(5) {
+    animation: titleLetterSlideDown ease-out 1s calc(var(--timeDif) * 4) forwards;
+}
+
+.title > *:nth-child(6) {
+    animation: titleLetterSlideDown ease-out 1s calc(var(--timeDif) * 5) forwards;
+}
+
+.title > *:nth-child(7) {
+    animation: titleLetterSlideDown ease-out 1s calc(var(--timeDif) * 6) forwards;
+}
+
+.title > *:nth-child(8) {
+    animation: titleLetterSlideDown ease-out 1s calc(var(--timeDif) * 7) forwards;
+}
+
+.title > *:nth-child(9) {
+    animation: titleLetterSlideDown ease-out 1s calc(var(--timeDif) * 8) forwards;
+}
+
+.title > *:nth-child(10) {
+    animation: titleLetterSlideDown ease-out 1s calc(var(--timeDif) * 9) forwards;
+}
+
+.title > *:nth-child(11) {
+    animation: titleLetterSlideDown ease-out 1s calc(var(--timeDif) * 10) forwards;
+}
+
+.title > *:nth-child(12) {
+    animation: titleLetterSlideDown ease-out 1s calc(var(--timeDif) * 11) forwards;
+}
+
+.ballWrapper {
+    width: 100%;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    position: relative;
+}
+
+.ballContainer {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    animation:  ballRoll 3s ease-out;
+}
+
+.ball {
+    position: relative;
+    aspect-ratio: 1;
+    height: 75%;
+    border-radius: 1000px;
+    cursor: pointer;
+    background-color: #000;
+}
+
+.shakeMe {
+    /* background-color: red; */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    aspect-ratio: 1;
+    z-index: 10000;  
+    animation: shakeLabelSpin 30s linear infinite;  
+}
+
+@keyframes shakeLabelSpin {
+    0% {
+        rotate: 180deg;
+    }
+    100% {
+        rotate: 540deg;
+    }
+}
+
+.shakeMe > * {
+    /* 
+    font size is accounted for in the space between the letters
+    dif is for the difference in angle between each letter
+    offset is the distance from the center of the ball
+    */
+    --fontSize: 2;
+    --dif: calc(4deg * var(--fontSize));
+    --offset: 30vh;
+    
+    /* angle is the angle of each letter */
+    --angle: calc(var(--dif) * var(--n));
+    rotate: calc(var(--angle) - 270deg);
+    position: absolute;
+    /* left and top are determined using trig functions, in a unit circle */
+    left: calc(cos(var(--angle)) * var(--offset));
+    top: calc(sin(var(--angle)) * var(--offset));
+    display: block;
+    font-family: Inter;
+    font-size: calc(var(--fontSize) * 1rem);
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.shakeMe > *:nth-child(1) {
+    --n: 1;
+}
+
+.shakeMe > *:nth-child(2) {
+    --n: 2;
+}
+
+.shakeMe > *:nth-child(3) {
+    --n: 3;
+}
+
+.shakeMe > *:nth-child(4) {
+    --n: 4;
+}
+
+.shakeMe > *:nth-child(5) {
+    --n: 5;
+}
+
+.shakeMe > *:nth-child(6) {
+    --n: 6;
+}
+
+.shakeMe > *:nth-child(7) {
+    --n: 7;
+}
+
+.shakeMe > *:nth-child(8) {
+    --n: 8;
+}
+
+.ball.shake {
+    animation: shake 0.4s linear infinite;
+}
+
+/* https://www.w3schools.com/howto/howto_css_shake_image.asp */
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.ball.onStart {
+    animation: ballSpin 3s linear;
+}
+
+.ball > *:not(.ballHighlight) {
+    user-select: none;
+    pointer-events: none;
+}
+
+.ballHighlight {
+    position: absolute;
+    border-radius: 100%;
+    left: 0%;
+    top: 0%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top left, #000 50%, #fff4 150%);
+    animation: highlightNoSpin 3s linear;
+}
+
+@keyframes highlightNoSpin {
+    0% {
+        rotate: 0deg;
+    }
+    100% {
+        rotate: -720deg;
+    }
+}
+
+@keyframes ballRoll {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 0%;
+    }
+}
+
+@keyframes ballSpin {
+    0% {
+        rotate: 0deg;
+    }
+    100% {
+        rotate: 720deg
+    }
+}
+
+.shadow {
+    aspect-ratio: 4 / 1;
+    position: absolute;
+    background-color: #0003;
+    width: 130%;
+    border-radius: 100%;
+    top: 70%;
+    left: 50%;
+    translate: -50%;
+}
+
+.white {
+    position: absolute;
+    background: #E7E7E7;
+    box-shadow: inset 0px 0px 10px 10px rgba(0, 0, 0, 0.25);
+    aspect-ratio: 1;
+    border-radius: 1000px;
+    width: 50%;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+}
+
+.tringle {
+    display: none;
+    
+    
+    background-color: #0b03;
+    width: calc(cos(30deg) * 100%);
+    aspect-ratio: 1.732 / 1.5;    
+    clip-path: polygon(0 100%, 50% 0%, 100% 100%);
+    position: absolute;
+    left: 50%;
+    translate: -50%;    
+}
+
+.tringleText {
+    display: none !important;
+    
+    
+    background-color: #00b3;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    
+    width: calc(sin(45deg) * 100%);
+    aspect-ratio: 1;
+    font-size: 2.5rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: blueviolet;
+    padding: 0%;
+    font-weight: 600;
+    box-sizing: border-box;
+}
+
+.eight {
+    font-size: 20vh;
+    color: #000;
+    font-family: Inter;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+}
+
+.inputWrapper {
+    width: 100%;
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    translate: 0 0%;
+    animation: inputSlideUp 3s ease-out;
+}
+
+@keyframes inputSlideUp {
+    0% {
+        translate: 0 100%;
+    }
+    100% {
+        translate: 0 0%;
+    }
+}
+
+.questionInput {
+    background-color: transparent;
+    border: 4px solid #352062;
+    border-radius: 8px;
+    font-size: 2rem;
+    padding: 4px 8px;
+    outline: none;
+    position: fixed;
+    bottom: 5vh;
+    width: 45%;
+}
+
+.questionInput::placeholder {
+    color: #fff;
+    opacity: 0.25;
+    font-weight: 500;
+    font-family: Inter;
+}
+
+.questionInput:hover, .questionInput:active, .questionInput:focus {
+    filter: brightness(1.1);
 }
