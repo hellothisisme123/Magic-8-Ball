@@ -297,36 +297,39 @@ html {
 }
 
 .tringle {
-    display: none;
+    /* display: none; */
+    opacity: 0;
     
     
-    background-color: #0b03;
-    width: calc(cos(30deg) * 100%);
+    background-color: #00155E;
+    width: calc(cos(30deg) * 90%);
     aspect-ratio: 1.732 / 1.5;    
     clip-path: polygon(0 100%, 50% 0%, 100% 100%);
     position: absolute;
     left: 50%;
-    translate: -50%;    
+    top: 7%;
+    translate: -50%;
 }
 
 .tringleText {
-    display: none !important;
+    /* display: none; */
+    display: flex;
+    opacity: 0;
     
-    
-    background-color: #00b3;
+    -webkit-text-stroke: 2px #fff3;
+    /* background-color: #00b3; */
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 55%;
     translate: -50% -50%;
     
-    width: calc(sin(45deg) * 100%);
+    width: calc(sin(45deg) * 75%);
     aspect-ratio: 1;
-    font-size: 2.5rem;
+    font-size: 1.7rem;
     text-align: center;
-    display: flex;
     justify-content: center;
     align-items: center;
-    color: blueviolet;
+    color: #fff;
     padding: 0%;
     font-weight: 600;
     box-sizing: border-box;
@@ -340,6 +343,54 @@ html {
     left: 50%;
     top: 50%;
     translate: -50% -50%;
+    opacity: 1;
+    transition: opacity 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+}
+
+.ball.active .tringle {
+    /* display: unset; */
+    transition: opacity 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+    opacity: 1;
+}
+
+.ball.active .tringleText {
+    /* display: flex; */
+    transition: opacity 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+    opacity: 1;
+}
+
+.ball.active .eight {
+    /* display: none; */
+    opacity: 0;
+}
+
+.ball.active {
+    animation: shakeBig 1s reverse 1;
+}
+
+@keyframes shakeBig {
+    0% { transform: translate(10px, 10px) rotate(0deg); }
+    5% { transform: translate(10px, -10px) rotate(1deg); }
+    10% { transform: translate(-10px, -20px) rotate(-1deg); }
+    15% { transform: translate(-10px, -10px) rotate(1deg); }
+    20% { transform: translate(-30px, 00px) rotate(1deg); }
+    25% { transform: translate(-30px, 10px) rotate(0deg); }
+    30% { transform: translate(30px, 20px) rotate(0deg); }
+    35% { transform: translate(10px, 20px) rotate(0deg); }
+    40% { transform: translate(10px, -10px) rotate(1deg); }
+    45% { transform: translate(10px, -20px) rotate(-1deg); }
+    50% { transform: translate(-10px, 20px) rotate(-1deg); }
+    55% { transform: translate(-10px, -20px) rotate(-1deg); }
+    60% { transform: translate(-30px, 10px) rotate(0deg); }
+    65% { transform: translate(-30px, 00px) rotate(1deg); }
+    70% { transform: translate(30px, 10px) rotate(-1deg); }
+    75% { transform: translate(30px, 20px) rotate(0deg); }
+    80% { transform: translate(-10px, -10px) rotate(1deg); }
+    85% { transform: translate(10px, 10px) rotate(0deg); }
+    90% { transform: translate(10px, 20px) rotate(0deg); }
+    95% { transform: translate(-10px, -20px) rotate(-1deg); }
+    100% { transform: translate(10px, -20px) rotate(-1deg); }
 }
 
 .inputWrapper {
