@@ -1,6 +1,7 @@
 const ball = document.querySelector('.ball')
 const tringleText = document.querySelector('.tringleText')
 const questionInput = document.querySelector('.questionInput')
+const ballContainer = document.querySelector('.ballContainer')
 
 setTimeout(() => {
     ball.classList.remove('onStart')
@@ -74,6 +75,21 @@ setTimeout(() => {
         if (e.key != 'Enter') return
         if (e.repeat) return
         answerQuestion() 
+    })
+
+    window.addEventListener('mousemove', e => {
+        const windowWidth = document.body.clientWidth
+        const windowHeight = document.body.clientHeight
+        const mouseXperc = (e.clientX / windowWidth * 1.5) - 0.5
+        const mouseYperc = (e.clientY / windowHeight * 1.5) - 0.5
+        
+        ballContainer.animate({
+            left: `${mouseXperc}%`,
+            top: `${mouseYperc}%`
+        }, {
+            duration: 800,
+            fill: 'forwards'
+        })
     })
     
 }, 3000);
