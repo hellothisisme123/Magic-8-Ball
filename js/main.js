@@ -58,17 +58,21 @@ setTimeout(() => {
         console.log(answer)
     }
 
-    // document.addEventListener('click', (e) => {
-    //     // determines if the ball has the active class or not and converts it to a boolean
-    //     let ballActive = Boolean([...ball.classList].filter(x => x == 'active')[0])
-    //     if (ballActive) {
-    //         console.log('red')
-    //         ball.classList.remove('active')
-    //     }
-    // })
-
+    let canTap = true
     ball.addEventListener('click', (e) => {
-        answerQuestion()
+        let ballActive = Boolean([...ball.classList].filter(x => x == 'active')[0])
+
+        if (ballActive) {
+            setTimeout(() => {
+                canTap = true
+            }, 1500);
+        } else if (!ballActive) {
+            canTap = true
+        } 
+        
+        // activates the switch
+        if (canTap) answerQuestion()
+        if (ballActive) canTap = false
     })
 
     questionInput.addEventListener('keypress', (e) => {

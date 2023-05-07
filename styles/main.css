@@ -43,6 +43,7 @@ html {
     min-width: 1rem;
     position: relative;
     --timeDif: 0.2s;
+    --slideEnd: 0;
 
     translate: 0 -100%;
 }
@@ -52,7 +53,7 @@ html {
         translate: 0 -100%;
     }
     100% {
-        translate: 0 0%;
+        translate: 0 var(--slideEnd);
     }
 }
 
@@ -158,11 +159,11 @@ html {
     offset is the distance from the center of the ball
     */
     --fontSize: 2;
-    --dif: calc(4deg * var(--fontSize));
+    --dif: 4deg;
     --offset: 30vh;
     
     /* angle is the angle of each letter */
-    --angle: calc(var(--dif) * var(--n));
+    --angle: calc(var(--dif) * var(--fontSize) * var(--n));
     rotate: calc(var(--angle) - 270deg);
     position: absolute;
     /* left and top are determined using trig functions, in a unit circle */
@@ -170,7 +171,7 @@ html {
     top: calc(sin(var(--angle)) * var(--offset));
     display: block;
     font-family: Inter;
-    font-size: calc(var(--fontSize) * 1rem);
+    font-size: calc((var(--fontSize) * 1vw) + 1rem);
     font-weight: 600;
     opacity: 0.7;
 }
@@ -325,7 +326,7 @@ html {
     
     width: calc(sin(45deg) * 75%);
     aspect-ratio: 1;
-    font-size: 1.7rem;
+    font-size: 2.9vh;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -433,4 +434,76 @@ html {
 
 .questionInput:hover, .questionInput:active, .questionInput:focus {
     filter: brightness(1.1);
+}
+
+@media (pointer:coarse) {
+    .ball {
+        --mult: 0.85; 
+        animation: var-shake 0.4s linear infinite;
+    }    
+
+    .ball.active {
+        animation: var-shake 0.4s linear infinite,
+        shakeBig 1s reverse 1;
+    }
+
+    @keyframes var-shake {
+        0% { transform: translate(calc(1px * var(--mult)), calc(1px * var(--mult))) rotate(calc(0deg * var(--mult))); }
+        10% { transform: translate(calc(-1px * var(--mult)), calc(-2px * var(--mult))) rotate(calc(-1deg * var(--mult))); }
+        20% { transform: translate(calc(-3px * var(--mult)), calc(0px * var(--mult))) rotate(calc(1deg * var(--mult))); }
+        30% { transform: translate(calc(3px * var(--mult)), calc(2px * var(--mult))) rotate(calc(0deg * var(--mult))); }
+        40% { transform: translate(calc(1px * var(--mult)), calc(-1px * var(--mult))) rotate(calc(1deg * var(--mult))); }
+        50% { transform: translate(calc(-1px * var(--mult)), calc(2px * var(--mult))) rotate(calc(-1deg * var(--mult))); }
+        60% { transform: translate(calc(-3px * var(--mult)), calc(1px * var(--mult))) rotate(calc(0deg * var(--mult))); }
+        70% { transform: translate(calc(3px * var(--mult)), calc(1px * var(--mult))) rotate(calc(-1deg * var(--mult))); }
+        80% { transform: translate(calc(-1px * var(--mult)), calc(-1px * var(--mult))) rotate(calc(1deg * var(--mult))); }
+        90% { transform: translate(calc(1px * var(--mult)), calc(2px * var(--mult))) rotate(calc(0deg * var(--mult))); }
+        100% { transform: translate(calc(1px * var(--mult)), calc(-2px * var(--mult))) rotate(calc(-1deg * var(--mult))); }
+    }
+}
+
+@media screen and (width <= 650px) {
+    .ball {
+        height: 70vw;
+    }
+
+    .shadow {
+        top: calc(60% + 7vw);
+        translate: -50%;
+    }    
+
+    .eight {
+        font-size: 20vw;
+    }
+
+    .shakeMe > * {
+        --fontSize: 2.5;
+        --offset: 40vw;
+        --dif: 3.25deg;
+    }
+
+    .title * {
+        font-size: 15vw;
+        --slideEnd: 50%;
+    }
+
+    .questionInput {
+        font-size: 1.5rem;
+        width: 75%;
+        padding: 2%;
+    }
+
+    .ball {
+        --mult: 0.75;
+    }
+
+    .tringleText {
+        font-size: 3.60vw;
+    }
+}
+
+@media screen and (width <= 414px) {
+    .shakeMe > * {
+        --fontSize: 2.25;
+    }
 }
